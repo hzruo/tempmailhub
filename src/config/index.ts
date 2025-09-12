@@ -54,6 +54,16 @@ export const defaultConfig: Config = {
         requests: 4, // 15分钟只能创建一个
         window: 900
       }
+    },
+    chattempmail: {
+      enabled: true,
+      priority: 6, 
+      timeout: 10000,
+      retries: 2,
+      rateLimit: {
+        requests: 30,
+        window: 60
+      }
     }
   },
   server: {

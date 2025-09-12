@@ -6,6 +6,7 @@ import { TempMailPlusProvider } from './tempmail-plus.js';
 import { MailTmProvider } from './mail-tm.js';
 import { EtempMailProvider } from './etempmail.js';
 import { VanishPostProvider } from './vanishpost.js';
+import { ChatTempMailProvider } from './chat-tempmail.js';
 
 /**
  * 提供者管理器实现
@@ -42,7 +43,7 @@ export class ProviderManager implements IProviderManager {
       }) : enabledProviders;
 
     // 按性能优先级排序（优先选择快速的provider）
-    const performanceOrder = ['tempmailplus', 'minmail', 'vanishpost', 'mailtm', 'etempmail'];
+    const performanceOrder = ['chattempmail', 'tempmailplus', 'minmail', 'vanishpost', 'mailtm', 'etempmail'];
     
     const sortedProviders = compatibleProviders.sort((a, b) => {
       const aIndex = performanceOrder.indexOf(a.name);
@@ -132,7 +133,8 @@ async function initializeProviders() {
     tempmailplus: configManager.getChannelConfig('tempmailplus'),
     mailtm: configManager.getChannelConfig('mailtm'),
     etempmail: configManager.getChannelConfig('etempmail'),
-    vanishpost: configManager.getChannelConfig('vanishpost')
+    vanishpost: configManager.getChannelConfig('vanishpost'),
+    chattempmail: configManager.getChannelConfig('chattempmail')
   };
 
   // 注册所有提供者
@@ -141,7 +143,8 @@ async function initializeProviders() {
     { name: 'tempmailplus', Provider: TempMailPlusProvider },
     { name: 'mailtm', Provider: MailTmProvider },
     { name: 'etempmail', Provider: EtempMailProvider },
-    { name: 'vanishpost', Provider: VanishPostProvider }
+    { name: 'vanishpost', Provider: VanishPostProvider },
+    { name: 'chattempmail', Provider: ChatTempMailProvider }
   ];
 
   for (const { name, Provider } of providers) {
